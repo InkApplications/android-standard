@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="primary">#ff0099cc</color>
+    <color name="danger">#ffcc0000</color>
+    <color name="warning">#ffff8800</color>
+    <color name="success">#ff669900</color>
+
+    <color name="foreground">#ff000000</color>
+    <color name="foreground_inverse">#ffffffff</color>
+
+    <color name="background">#ffffffff</color>
+    <color name="background_inverse">#ff000000</color>
+</resources>
