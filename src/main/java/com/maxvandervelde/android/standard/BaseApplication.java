@@ -1,12 +1,16 @@
-package com.maxvandervelde.standard;
+package com.maxvandervelde.android.standard;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
-
-import com.maxvandervelde.standard.BuildConfig;
-
-import com.maxvandervelde.standard.dependencyinjection.modules.ApplicationModule;
+import com.maxvandervelde.android.eventdispatcher.event.application.OnCreateEvent;
+import com.maxvandervelde.android.eventdispatcher.event.application.OnLowMemoryEvent;
+import com.maxvandervelde.android.eventdispatcher.event.application.OnTerminateEvent;
+import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
+import com.maxvandervelde.android.standard.dependencyinjection.registry.ApplicationRegistry;
+import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
 
 /**
@@ -16,6 +20,9 @@ import dagger.ObjectGraph;
  */
 public class BaseApplication extends Application
 {
+    @Inject Bus applicationBus;
+    @Inject ApplicationRegistry registry;
+
     /**
      * Dagger Object Graph
      */
@@ -28,6 +35,22 @@ public class BaseApplication extends Application
 
         ButterKnife.setDebug(BuildConfig.DEBUG);
         this.inject(this);
+        this.registry.register();
+        this.applicationBus.post(new OnCreateEvent(this));
+    }
+
+    @Override
+    public void onTerminate()
+    {
+        super.onTerminate();
+        this.applicationBus.post(new OnTerminateEvent(this));
+    }
+
+    @Override
+    public void onLowMemory()
+    {
+        super.onLowMemory();
+        this.applicationBus.post(new OnLowMemoryEvent(this));
     }
 
     /**
@@ -61,7 +84,7 @@ public class BaseApplication extends Application
      * 
      * @return A new dagger object graph
      */
-    private ObjectGraph buildObjectGraph()
+    protected ObjectGraph buildObjectGraph()
     {
         ApplicationModule applicationModule = new ApplicationModule(this);
 
