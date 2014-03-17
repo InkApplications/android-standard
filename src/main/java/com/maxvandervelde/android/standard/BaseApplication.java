@@ -4,12 +4,10 @@ import android.app.Application;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import com.maxvandervelde.android.eventdispatcher.event.application.OnCreateEvent;
 import com.maxvandervelde.android.eventdispatcher.event.application.OnLowMemoryEvent;
 import com.maxvandervelde.android.eventdispatcher.event.application.OnTerminateEvent;
-import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
-import com.maxvandervelde.standard.BuildConfig;
+import com.maxvandervelde.android.standard.dependencyinjection.module.StandardApplicationModule;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
 
@@ -35,7 +33,6 @@ public class BaseApplication extends Application
     {
         super.onCreate();
 
-        ButterKnife.setDebug(BuildConfig.DEBUG);
         this.inject(this);
         this.applicationBus.post(new OnCreateEvent(this));
     }
@@ -87,14 +84,14 @@ public class BaseApplication extends Application
      */
     protected ObjectGraph buildObjectGraph()
     {
-        ObjectGraph graph = ObjectGraph.create(this.getModules());
+        ObjectGraph graph = ObjectGraph.create(this.getModules().toArray());
 
         return graph;
     }
 
-    protected List<Object> getModules()
+    public List<Object> getModules()
     {
-        ApplicationModule applicationModule = new ApplicationModule(this);
+        StandardApplicationModule applicationModule = new StandardApplicationModule(this);
 
         ArrayList<Object> modules = new ArrayList<Object>();
         modules.add(applicationModule);

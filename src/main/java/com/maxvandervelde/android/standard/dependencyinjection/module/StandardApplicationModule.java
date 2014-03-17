@@ -5,12 +5,9 @@ import android.app.Application;
 import javax.inject.Singleton;
 
 import com.maxvandervelde.android.eventdispatcher.dependencyinjection.module.AndroidEventsModule;
-import com.maxvandervelde.android.logger.ConsoleLogger;
 import com.maxvandervelde.android.standard.BaseApplication;
-import com.maxvandervelde.standard.BuildConfig;
 import dagger.Module;
 import dagger.Provides;
-import org.apache.commons.logging.Log;
 
 @Module(
     injects = {
@@ -23,11 +20,11 @@ import org.apache.commons.logging.Log;
     complete = false,
     library = true
 )
-public class ApplicationModule
+public class StandardApplicationModule
 {
     final private BaseApplication application;
 
-    public ApplicationModule(BaseApplication application)
+    public StandardApplicationModule(BaseApplication application)
     {
         this.application = application;
     }
@@ -35,12 +32,5 @@ public class ApplicationModule
     @Provides @Singleton Application provideApplication()
     {
         return this.application;
-    }
-
-    @Provides @Singleton Log provideLogger()
-    {
-        ConsoleLogger logger = new ConsoleLogger(BuildConfig.DEBUG, "Application");
-
-        return logger;
     }
 }

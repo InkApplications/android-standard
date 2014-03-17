@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import com.maxvandervelde.android.eventdispatcher.event.activity.*;
 import com.maxvandervelde.android.standard.BaseApplication;
-import com.maxvandervelde.android.standard.dependencyinjection.module.ActivityModule;
-import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
+import com.maxvandervelde.android.standard.dependencyinjection.module.StandardActivityModule;
+import com.maxvandervelde.android.standard.dependencyinjection.module.StandardApplicationModule;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
 
@@ -96,16 +96,16 @@ public abstract class BaseActivity extends Activity
      */
     private void injectDagger()
     {
-        ObjectGraph graph = ObjectGraph.create(this.getModules());
+        ObjectGraph graph = ObjectGraph.create(this.getModules().toArray());
 
         graph.inject(this);
     }
 
-    protected List<Object> getModules()
+    public List<Object> getModules()
     {
-        ActivityModule activityModule = new ActivityModule(this);
+        StandardActivityModule activityModule = new StandardActivityModule(this);
         BaseApplication baseApplication = (BaseApplication) this.getApplication();
-        ApplicationModule applicationModule = new ApplicationModule(baseApplication);
+        StandardApplicationModule applicationModule = new StandardApplicationModule(baseApplication);
 
         ArrayList<Object> modules = new ArrayList<Object>();
         modules.add(applicationModule);

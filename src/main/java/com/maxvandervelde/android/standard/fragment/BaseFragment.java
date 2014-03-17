@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import butterknife.ButterKnife;
-import com.maxvandervelde.android.standard.BaseApplication;
 import com.maxvandervelde.android.standard.activity.BaseActivity;
-import com.maxvandervelde.android.standard.dependencyinjection.module.ActivityModule;
-import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
 import dagger.ObjectGraph;
+
+import java.util.List;
 
 public abstract class BaseFragment extends Fragment
 {
@@ -37,12 +36,9 @@ public abstract class BaseFragment extends Fragment
     private void injectDagger()
     {
         BaseActivity parentActivity = (BaseActivity) this.getActivity();
-        BaseApplication baseApplication = (BaseApplication) parentActivity.getApplication();
+        List<Object> parentModules = parentActivity.getModules();
 
-        ActivityModule activityModule = new ActivityModule(parentActivity);
-        ApplicationModule applicationModule = new ApplicationModule(baseApplication);
-
-        ObjectGraph graph = ObjectGraph.create(applicationModule, activityModule);
+        ObjectGraph graph = ObjectGraph.create(parentModules.toArray());
 
         graph.inject(this);
     }

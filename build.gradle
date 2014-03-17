@@ -1,44 +1,16 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
-    }
+apply plugin: 'java'
+
+configurations {
+    provided
 }
-
-apply plugin: 'android'
-
-android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.1"
-    packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-        exclude 'LICENSE.txt'
-    }
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 19
-    }
-}
-
 repositories {
-    maven {
-        url 'http://india.bravo:8081/nexus/content/groups/public/'
-    }
     mavenCentral()
 }
-
 dependencies {
+    compile 'com.google.android:android:4.1.1.4'
     compile 'com.jakewharton:butterknife:4.0.1'
-    compile 'com.google.guava:guava:15.0'
     compile 'com.squareup.dagger:dagger:1.1.0'
     compile 'com.squareup.dagger:dagger-compiler:1.1.0'
-    compile 'org.mockito:mockito-core:1.9.5'
-    compile 'junit:junit:4.11'
-    compile 'org.easytesting:fest-assert:1.4'
-    compile 'com.nerdery:Voodoo:1.0.0@aar'
-    compile 'joda-time:joda-time:2.3'
     compile 'com.squareup:otto:1.3.4'
     compile 'log4j:log4j:1.2.16'
 }
