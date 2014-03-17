@@ -1,10 +1,10 @@
-package com.maxvandervelde.android.standard.dependencyinjection.module;
+package com.inkapplications.android.standard.dependencyinjection.module;
 
 import android.app.Activity;
 
 import javax.inject.Singleton;
 
-import com.maxvandervelde.android.standard.activity.BaseActivity;
+import com.inkapplications.android.standard.activity.BaseActivity;
 import dagger.Module;
 import dagger.Provides;
 

@@ -1,13 +1,13 @@
-package com.maxvandervelde.android.standard;
+package com.inkapplications.android.standard;
 
 import android.app.Application;
 
 import javax.inject.Inject;
 
-import com.maxvandervelde.android.eventdispatcher.event.application.OnCreateEvent;
-import com.maxvandervelde.android.eventdispatcher.event.application.OnLowMemoryEvent;
-import com.maxvandervelde.android.eventdispatcher.event.application.OnTerminateEvent;
-import com.maxvandervelde.android.standard.dependencyinjection.module.StandardApplicationModule;
+import com.inkapplications.android.standard.dependencyinjection.module.StandardApplicationModule;
+import com.inkapplications.android.eventdispatcher.event.application.OnCreateEvent;
+import com.inkapplications.android.eventdispatcher.event.application.OnLowMemoryEvent;
+import com.inkapplications.android.eventdispatcher.event.application.OnTerminateEvent;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
 

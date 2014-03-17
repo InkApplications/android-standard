@@ -1,4 +1,4 @@
-package com.maxvandervelde.android.standard.activity;
+package com.inkapplications.android.standard.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import com.maxvandervelde.android.eventdispatcher.event.activity.*;
-import com.maxvandervelde.android.standard.BaseApplication;
-import com.maxvandervelde.android.standard.dependencyinjection.module.StandardActivityModule;
-import com.maxvandervelde.android.standard.dependencyinjection.module.StandardApplicationModule;
+import com.inkapplications.android.eventdispatcher.event.activity.*;
+import com.inkapplications.android.standard.BaseApplication;
+import com.inkapplications.android.standard.dependencyinjection.module.StandardActivityModule;
+import com.inkapplications.android.standard.dependencyinjection.module.StandardApplicationModule;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
 

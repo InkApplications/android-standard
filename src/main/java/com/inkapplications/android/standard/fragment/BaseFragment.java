@@ -1,11 +1,11 @@
-package com.maxvandervelde.android.standard.fragment;
+package com.inkapplications.android.standard.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 
 import butterknife.ButterKnife;
-import com.maxvandervelde.android.standard.activity.BaseActivity;
+import com.inkapplications.android.standard.activity.BaseActivity;
 import dagger.ObjectGraph;
 
 import java.util.List;

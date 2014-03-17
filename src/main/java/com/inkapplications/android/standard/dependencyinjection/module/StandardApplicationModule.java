@@ -1,11 +1,11 @@
-package com.maxvandervelde.android.standard.dependencyinjection.module;
+package com.inkapplications.android.standard.dependencyinjection.module;
 
 import android.app.Application;
 
 import javax.inject.Singleton;
 
-import com.maxvandervelde.android.eventdispatcher.dependencyinjection.module.AndroidEventsModule;
-import com.maxvandervelde.android.standard.BaseApplication;
+import com.inkapplications.android.eventdispatcher.dependencyinjection.module.AndroidEventsModule;
+import com.inkapplications.android.standard.BaseApplication;
 import dagger.Module;
 import dagger.Provides;
 
