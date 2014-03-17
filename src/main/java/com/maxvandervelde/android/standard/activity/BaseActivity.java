@@ -10,9 +10,11 @@ import com.maxvandervelde.android.eventdispatcher.event.activity.*;
 import com.maxvandervelde.android.standard.BaseApplication;
 import com.maxvandervelde.android.standard.dependencyinjection.module.ActivityModule;
 import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
-import com.maxvandervelde.android.standard.dependencyinjection.registry.ActivityRegistry;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base Activity
@@ -25,14 +27,12 @@ import dagger.ObjectGraph;
 public abstract class BaseActivity extends Activity
 {
     @Inject Bus applicationBus;
-    @Inject ActivityRegistry registry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         this.injectSelf();
-        this.registry.register();
         this.applicationBus.post(new OnCreateEvent(this, savedInstanceState));
     }
 
@@ -96,13 +96,21 @@ public abstract class BaseActivity extends Activity
      */
     private void injectDagger()
     {
-        ActivityModule activityModule = new ActivityModule(this);
+        ObjectGraph graph = ObjectGraph.create(this.getModules());
 
+        graph.inject(this);
+    }
+
+    protected List<Object> getModules()
+    {
+        ActivityModule activityModule = new ActivityModule(this);
         BaseApplication baseApplication = (BaseApplication) this.getApplication();
         ApplicationModule applicationModule = new ApplicationModule(baseApplication);
 
-        ObjectGraph graph = ObjectGraph.create(applicationModule, activityModule);
+        ArrayList<Object> modules = new ArrayList<Object>();
+        modules.add(applicationModule);
+        modules.add(activityModule);
 
-        graph.inject(this);
+        return modules;
     }
 }

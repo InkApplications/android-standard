@@ -9,9 +9,12 @@ import com.maxvandervelde.android.eventdispatcher.event.application.OnCreateEven
 import com.maxvandervelde.android.eventdispatcher.event.application.OnLowMemoryEvent;
 import com.maxvandervelde.android.eventdispatcher.event.application.OnTerminateEvent;
 import com.maxvandervelde.android.standard.dependencyinjection.module.ApplicationModule;
-import com.maxvandervelde.android.standard.dependencyinjection.registry.ApplicationRegistry;
+import com.maxvandervelde.standard.BuildConfig;
 import com.squareup.otto.Bus;
 import dagger.ObjectGraph;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base Application
@@ -21,7 +24,6 @@ import dagger.ObjectGraph;
 public class BaseApplication extends Application
 {
     @Inject Bus applicationBus;
-    @Inject ApplicationRegistry registry;
 
     /**
      * Dagger Object Graph
@@ -35,7 +37,6 @@ public class BaseApplication extends Application
 
         ButterKnife.setDebug(BuildConfig.DEBUG);
         this.inject(this);
-        this.registry.register();
         this.applicationBus.post(new OnCreateEvent(this));
     }
 
@@ -86,10 +87,18 @@ public class BaseApplication extends Application
      */
     protected ObjectGraph buildObjectGraph()
     {
-        ApplicationModule applicationModule = new ApplicationModule(this);
-
-        ObjectGraph graph = ObjectGraph.create(applicationModule);
+        ObjectGraph graph = ObjectGraph.create(this.getModules());
 
         return graph;
+    }
+
+    protected List<Object> getModules()
+    {
+        ApplicationModule applicationModule = new ApplicationModule(this);
+
+        ArrayList<Object> modules = new ArrayList<Object>();
+        modules.add(applicationModule);
+
+        return modules;
     }
 }

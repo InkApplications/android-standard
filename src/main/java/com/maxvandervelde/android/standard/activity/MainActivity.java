@@ -1,8 +1,7 @@
 package com.maxvandervelde.android.standard.activity;
 
 import android.os.Bundle;
-
-import com.maxvandervelde.android.standard.R;
+import com.maxvandervelde.standard.R;
 
 public class MainActivity extends BaseActivity
 {

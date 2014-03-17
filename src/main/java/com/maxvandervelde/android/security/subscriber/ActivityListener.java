@@ -21,6 +21,6 @@ public class ActivityListener
     @Subscribe
     public void onActivityResume(OnResumeEvent event)
     {
-        authenticationProvider.authenticate();
+        authenticationProvider.authenticate(null);
     }
 }

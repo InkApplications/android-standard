@@ -7,20 +7,19 @@ import javax.inject.Singleton;
 import com.maxvandervelde.android.eventdispatcher.dependencyinjection.module.AndroidEventsModule;
 import com.maxvandervelde.android.logger.ConsoleLogger;
 import com.maxvandervelde.android.standard.BaseApplication;
-import com.maxvandervelde.android.standard.BuildConfig;
-import com.maxvandervelde.android.standard.dependencyinjection.registry.ApplicationRegistry;
+import com.maxvandervelde.standard.BuildConfig;
 import dagger.Module;
 import dagger.Provides;
 import org.apache.commons.logging.Log;
 
 @Module(
     injects = {
-        ApplicationRegistry.class,
         BaseApplication.class
     },
     includes = {
         AndroidEventsModule.class
     },
+    staticInjections = { EeagerSingletons.class },
     complete = false,
     library = true
 )

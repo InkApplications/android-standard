@@ -6,13 +6,11 @@ import javax.inject.Singleton;
 
 import com.maxvandervelde.android.standard.activity.BaseActivity;
 import com.maxvandervelde.android.standard.activity.MainActivity;
-import com.maxvandervelde.android.standard.dependencyinjection.registry.ActivityRegistry;
 import dagger.Module;
 import dagger.Provides;
 
 @Module(
     injects = {
-        ActivityRegistry.class,
         MainActivity.class
     },
     addsTo = ApplicationModule.class,
