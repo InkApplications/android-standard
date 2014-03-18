@@ -26,6 +26,9 @@ import java.util.List;
  */
 public abstract class BaseActivity extends Activity
 {
+    /**
+     * Application-wide Event Bus
+     */
     @Inject Bus applicationBus;
 
     @Override
@@ -101,6 +104,16 @@ public abstract class BaseActivity extends Activity
         graph.inject(this);
     }
 
+    /**
+     * Get Modules
+     *
+     * Gets all of the dagger modules to load into the application object graph.
+     * These modules are loaded for all Activities, but not the entire
+     * application.
+     * Method may be overridden to include additional modules.
+     *
+     * @return The modules to include in the object graph
+     */
     public List<Object> getModules()
     {
         StandardActivityModule activityModule = new StandardActivityModule(this);

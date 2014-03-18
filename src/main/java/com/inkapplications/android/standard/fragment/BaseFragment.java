@@ -10,6 +10,14 @@ import dagger.ObjectGraph;
 
 import java.util.List;
 
+/**
+ * Base Fragment
+ *
+ * Sets up a Fragment with Dependency Injection and registers Activity events
+ * with the application event dispatcher / bus.
+ *
+ * @author Maxwell Vandervelde <Max@MaxVandervelde.com>
+ */
 public abstract class BaseFragment extends Fragment
 {
     @Override
@@ -31,7 +39,10 @@ public abstract class BaseFragment extends Fragment
     /**
      * Inject Dagger
      *
-     * Uses Dagger to inject the current class
+     * Uses Dagger to inject the current class with the base activity
+     * dependencies.
+     * This method may not be overridden, as fragments do not need their own
+     * dependency graph.
      */
     private void injectDagger()
     {

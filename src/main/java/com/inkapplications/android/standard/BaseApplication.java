@@ -17,10 +17,16 @@ import java.util.List;
 /**
  * Base Application
  *
+ * Sets up an Application with Dependency Injection and registers events
+ * with the application event dispatcher / bus.
+ *
  * @author Maxwell Vandervelde <Max@MaxVandervelde.com>
  */
 public class BaseApplication extends Application
 {
+    /**
+     * Application-wide Event Bus.
+     */
     @Inject Bus applicationBus;
 
     /**
@@ -89,6 +95,15 @@ public class BaseApplication extends Application
         return graph;
     }
 
+    /**
+     * Get Modules
+     *
+     * Gets all of the dagger modules to load into the application object graph.
+     * These modules are loaded for the application only.
+     * Method may be overridden to include additional modules.
+     *
+     * @return The modules to include in the object graph
+     */
     public List<Object> getModules()
     {
         StandardApplicationModule applicationModule = new StandardApplicationModule(this);
