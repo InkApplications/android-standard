@@ -101,9 +101,12 @@ repositories {
 
 dependencies {
     compile 'com.google.android:android:4.1.+'
+    compile 'com.jakewharton:butterknife:4.0.+'
     compile 'com.squareup.dagger:dagger:1.1.+'
     compile 'com.squareup.dagger:dagger-compiler:1.1.+'
     compile 'com.squareup:otto:1.3.+'
+    compile 'com.inkapplications:android-logger:1.0.0-SNAPSHOT'
+    compile 'com.inkapplications:android-events-module:1.0.0-SNAPSHOT'
 }
 
 
