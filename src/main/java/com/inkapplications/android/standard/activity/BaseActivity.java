@@ -102,6 +102,7 @@ public abstract class BaseActivity extends Activity
         ObjectGraph graph = ObjectGraph.create(this.getModules().toArray());
 
         graph.inject(this);
+        graph.injectStatics();
     }
 
     /**
