@@ -16,7 +16,6 @@ import dagger.Provides;
     includes = {
         AndroidEventsModule.class
     },
-    staticInjections = { EeagerSingletons.class },
     complete = false,
     library = true
 )
