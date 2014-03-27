@@ -12,7 +12,11 @@ def sonatypeRepositoryUrl = ""
 
 //set build variables based on build type (release, continuous integration, development)
 if(hasProperty("release")) {
-    version += getProperty("version");
+    if (false == hasProperty("bugfix")) {
+        throw new GradleException('You Must supply a bugfix argument for releasing');
+    }
+
+    version = version + "." + getProperty("bugfix");
     isReleaseBuild = true
     sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 } else if (hasProperty("snapshot")) {
