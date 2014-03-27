@@ -21,11 +21,11 @@ import java.util.List;
 public abstract class BaseFragment extends Fragment
 {
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
-        super.onViewCreated(view, savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.inject(this.getActivity());
         this.injectDagger();
     }
 
@@ -52,5 +52,6 @@ public abstract class BaseFragment extends Fragment
         ObjectGraph graph = ObjectGraph.create(parentModules.toArray());
 
         graph.inject(this);
+        graph.injectStatics();
     }
 }
