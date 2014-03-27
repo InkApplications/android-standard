@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'com.inkapplications'
-version = '1.0.0'
+version = '1.0'
 
 def isDevBuild = false
 def isReleaseBuild = false
@@ -12,6 +12,7 @@ def sonatypeRepositoryUrl = ""
 
 //set build variables based on build type (release, continuous integration, development)
 if(hasProperty("release")) {
+    version += getProperty("version");
     isReleaseBuild = true
     sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 } else if (hasProperty("snapshot")) {
