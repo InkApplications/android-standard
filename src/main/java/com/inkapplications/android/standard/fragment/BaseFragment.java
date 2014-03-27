@@ -21,9 +21,8 @@ import java.util.List;
 public abstract class BaseFragment extends Fragment
 {
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         ButterKnife.inject(this.getActivity());
         this.injectDagger();
